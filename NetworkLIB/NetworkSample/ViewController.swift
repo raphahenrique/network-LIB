@@ -34,13 +34,31 @@ class ViewController: UIViewController {
                 return
             }
             
+            let decoder = JSONDecoder()
+            
+            do {
+                let user = try decoder.decode(UserTodo.self, from: content)
+                print(user.title)
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            
             print("gotten json response dictionary is \n \(json)")
             // update UI using the response here
             
         }
         
     }
+}
 
+struct UserTodo: Decodable {
 
+    let userId: Int
+    let id: Int
+    let title: String
+    let completed: Bool
+    
+    
 }
 
